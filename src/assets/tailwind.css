@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.total {
+    @apply float-right grid grid-cols-2 divide-x-2 divide-teal-700 inline-block;
+}
+
+.total div {
+    @apply inline-block p-2;
+}
+
+.header {
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    position: fixed;
+    width: 100%;
+    @apply bg-white border-b-2 border-teal-700 p-5;
+}

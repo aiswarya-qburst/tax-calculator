@@ -1,0 +1,77 @@
+{
+  "users": [
+    {
+      "empid": 1,
+      "name": "Iron Man",
+      "salary": "75000"
+    },
+    {
+      "empid": 2,
+      "name": "Captain America",
+      "salary": "80000"
+    },
+    {
+      "empid": 3,
+      "name": "Black widow",
+      "salary": "90000"
+    }
+  ],
+  "forms": {
+    "current": {
+      "income": [
+        {
+          "type": "text",
+          "label": "Salary",
+          "required": true
+        },
+        {
+          "type": "text",
+          "label": "House property"
+        },
+        {
+          "type": "text",
+          "label": "Interest"
+        },
+        {
+          "type": "text",
+          "label": "Winning from Lottery etc."
+        }
+      ],
+      "deductions": [
+        {
+          "type": "text",
+          "label": "Life insurance Premium"
+        },
+        {
+          "type": "text",
+          "label": "Contribution towards provident fund / PPF"
+        },
+        {
+          "type": "text",
+          "label": "Investment in NSC"
+        },
+        {
+          "type": "text",
+          "label": "Contribution toward notified pension fund by MF/UTI"
+        },
+        {
+          "type": "text",
+          "label": "Re-payment of housing loan etc"
+        },
+         {
+          "type": "text",
+          "label": "Tuition fees paid for children"
+        },
+         {
+          "type": "text",
+          "label": "5 Years fixed deposit with PO or Schedule Bank"
+        },
+         {
+          "type": "text",
+          "label": "Medi-claim premium"
+        }
+      ]
+    }
+  },
+  "slabs": []
+}
