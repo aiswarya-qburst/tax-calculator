@@ -1,53 +1,81 @@
-import React, { ReactNode } from 'react';
-import { Formik, Form as FormikForm, Field as FormField, ErrorMessage, useFormikContext } from 'formik';
+import React from 'react';
+import { Formik, Field as FormField, ErrorMessage, useFormikContext } from 'formik';
 import { Field } from '../models/common.interface';
 
-interface FormF {
-    children: ReactNode;
+interface FForm {
+    children: any;
     initialValues: Record<string, unknown>;
+    handleSubmit?: (values: Record<string, unknown>) => void;
 }
 
 interface Button {
     title: string;
-    handler?: (e: React.MouseEventHandler<React.SyntheticEvent>) => void;
+    handleSubmit?: (e: React.MouseEventHandler<React.SyntheticEvent>) => void;
 }
 
-export const Form: React.FunctionComponent<FormF> = (props: FormF) => {
-    const onSubmit = (values, { setSubmitting }) => setSubmitting(false);
+export const Form = (props: FForm): JSX.Element => {
+    const onSubmit = (values, { setSubmitting }) => {
+        props.handleSubmit(values);
+        setSubmitting(false);
+    };
 
     return (
-        <Formik {...props} onSubmit={onSubmit}>
-            <FormikForm className="mx-8 p-8 space-y-3">{props.children}</FormikForm>
+        <Formik initialValues={props.initialValues} onSubmit={onSubmit}>
+            {(formProps) => (
+                <form className="mx-8 p-8 space-y-3" onSubmit={formProps.handleSubmit}>
+                    {React.Children.map(props.children, (child) =>
+                        React.cloneElement(child, { values: formProps.values, handleChange: formProps.handleChange }),
+                    )}
+                </form>
+            )}
         </Formik>
     );
 };
 
-export const TextField: React.FunctionComponent<Field> = ({ name, label, ...rest }: Field) => {
+//: React.FunctionComponent<Field>
+export const TextField = ({
+    data,
+    values,
+    handleChange,
+}: {
+    data: Field;
+    values?: Record<string, string>;
+    handleChange?: (e: React.SyntheticEvent) => void;
+}): JSX.Element => {
+    const { name, label, disabled } = data;
+
     return (
-        <div className="grid grid-cols-3 gap-4">
+        <div className="form-control-wrapper">
             {label && <label htmlFor={name}>{label}</label>}
             <FormField
-                className="col-span-2 border border-gray-500 focus:border-blue-500 rounded pl-5 h-10"
+                className="form-control"
                 type="text"
                 name={name}
                 id={name}
-                {...rest}
+                readOnly={disabled}
+                onChange={handleChange}
+                value={values[name]}
             />
             <ErrorMessage name={name} render={(msg) => <div style={{ color: 'red' }}>{msg}</div>} />
         </div>
     );
 };
 
-export const SelectField: React.FunctionComponent<Field> = ({ name, label, options }: Field) => {
+export const SelectField = ({
+    data,
+    values,
+    handleChange,
+}: {
+    data: Field;
+    values?: Record<string, string>;
+    handleChange?: (e: React.SyntheticEvent) => void;
+}): JSX.Element => {
+    const { name, label, options } = data;
+
     return (
-        <div className="grid grid-cols-3 gap-4">
+        <div className="form-control-wrapper">
             {label && <label htmlFor={name}>{label}</label>}
-            <FormField
-                as="select"
-                id={name}
-                name={name}
-                className="col-span-2 border border-gray-500 focus:border-blue-500 rounded pl-5 h-10"
-            >
+            <FormField as="select" id={name} name={name} className="form-control" onChange={handleChange}>
                 <option value="">Choose...</option>
                 {options.map((optn) => (
                     <option key={optn.value} value={optn.value} label={optn.label || optn.value} />
@@ -58,11 +86,11 @@ export const SelectField: React.FunctionComponent<Field> = ({ name, label, optio
     );
 };
 
-export const SubmitButton: React.FunctionComponent<Button> = ({ title, ...rest }: Button) => {
+export const SubmitButton: React.FunctionComponent<Button> = ({ title }: Button) => {
     const { isSubmitting } = useFormikContext();
 
     return (
-        <button type="submit" {...rest} disabled={isSubmitting}>
+        <button type="submit" disabled={isSubmitting} className="submit-btn">
             {title}
         </button>
     );

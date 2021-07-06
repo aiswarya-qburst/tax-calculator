@@ -1,26 +1,40 @@
 import React from 'react';
-import { TextField, SelectField } from './FormElements';
 import { Field } from '../models/common.interface';
+import { TextField, SelectField } from './FormElements';
+import { getName } from './utils';
 
-const InputForm = ({ field }: { field: Field }): JSX.Element => {
-    const getFormElement = (name: string, el: Field) => {
-        const props: Field = {
+const InputForm = ({
+    field,
+    values,
+    handleChange,
+}: {
+    field: Field;
+    values?: Record<string, string>;
+    handleChange?: (e: React.SyntheticEvent) => void;
+}): JSX.Element => {
+    const getFormElement = (
+        name: string,
+        el: Field,
+        values: Record<string, string>,
+        handleChange: (e: React.SyntheticEvent) => void,
+    ) => {
+        const data: Field = {
             name: name,
             label: el.label,
             type: el.type,
-            options: el.options,
+            options: el.options ? el.options : [],
+            value: el.value ? el.value : '',
+            disabled: el.disabled ? el.disabled : false,
         };
-
-        if (el.type === 'text' || el.type === 'email') {
-            return <TextField {...props} />;
+        if (el.type === 'text') {
+            return <TextField data={data} values={values} handleChange={handleChange} />;
         }
-
         if (el.type === 'dropdown') {
-            return <SelectField {...props} />;
+            return <SelectField data={data} values={values} handleChange={handleChange} />;
         }
     };
 
-    return !field ? <></> : <div className="divide-y-2 divide-teal-700">{getFormElement(field.label, field)}</div>;
+    return !field ? <></> : <>{getFormElement(getName(field.label), field, values, handleChange)}</>;
 };
 
 export default InputForm;

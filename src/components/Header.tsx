@@ -1,18 +1,20 @@
 import React from 'react';
+import { TotalTax } from '../models/common.interface';
 
-const Header: React.FunctionComponent = () => {
+//: React.FunctionComponent<TotalTax>
+const Header = ({ tax }: { tax: TotalTax }): JSX.Element => {
     return (
         <div className="h-20 m-6">
             <div className="header">
                 <div className="text-teal-700 text-2xl inline-block pt-5">Income Tax Calculator</div>
                 <div className="total">
                     <div>
-                        <p>Total Taxable Income</p>
-                        <p>5,50,000</p>
+                        <p>Annual Tax Amount</p>
+                        <p>{tax.annual || '-'}</p>
                     </div>
                     <div>
                         <p>Monthly Payable</p>
-                        <p>2500</p>
+                        <p>{tax.annual / 12 || '-'}</p>
                     </div>
                 </div>
             </div>
