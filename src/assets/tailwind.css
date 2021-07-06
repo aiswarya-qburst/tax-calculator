@@ -18,3 +18,33 @@
     width: 100%;
     @apply bg-white border-b-2 border-teal-700 p-5;
 }
+
+.basic-section form {
+    @apply grid grid-cols-3
+}
+
+.form-control-wrapper {
+    @apply grid grid-cols-3 m-3;
+}
+
+.form-control {
+    @apply col-span-2 border border-gray-500 focus:border-teal-700 rounded px-5 h-10;
+}
+
+.list {
+    @apply mx-8 shadow-inner bg-teal-50 flex justify-center border-b-2 border-teal-700 mb-0;
+}
+
+.tab {
+    @apply inline-block p-4 mx-4 w-48 text-center text-teal-700;
+}
+
+.active {
+    @apply bg-teal-50 border-2 border-teal-700;
+    border-bottom-color: transparent;
+    margin-bottom: -2px;
+}
+
+.submit-btn {
+    @apply bg-orange-400 p-4 m-3 float-right text-red-900 rounded;
+}
