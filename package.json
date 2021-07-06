@@ -9,7 +9,8 @@
     "watch": "webpack -w",
     "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
     "lint": "eslint '*/**/*.tsx'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "keywords": [
     "react",
@@ -20,12 +21,17 @@
   "author": "Aiswarya",
   "license": "MIT",
   "dependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@types/jest": "^26.0.23",
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.8",
     "css-loader": "^5.2.6",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "formik": "^2.2.9",
+    "isomorphic-fetch": "^3.0.0",
+    "jest": "^27.0.6",
     "json-server": "^0.16.3",
     "prettier": "^2.3.1",
     "react": "^16.14.0",
@@ -33,6 +39,7 @@
     "react-query": "^3.17.2",
     "serve": "^12.0.0",
     "style-loader": "^2.0.0",
+    "ts-jest": "^27.0.3",
     "typescript": "^4.3.4",
     "yup": "^0.32.9"
   },
