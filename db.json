@@ -1,28 +1,29 @@
 {
   "users": [
     {
-      "empid": 1,
+      "id": 1,
       "name": "Iron Man",
-      "salary": "75000"
+      "salary": "750000"
     },
     {
-      "empid": 2,
+      "id": 2,
       "name": "Captain America",
-      "salary": "80000"
+      "salary": "300000"
     },
     {
-      "empid": 3,
+      "id": 3,
       "name": "Black widow",
-      "salary": "90000"
+      "salary": "1000000"
     }
   ],
   "forms": {
-    "current": {
+    "20-21": {
       "income": [
         {
           "type": "text",
           "label": "Salary",
-          "required": true
+          "required": true,
+          "disabled": true
         },
         {
           "type": "text",
@@ -34,13 +35,19 @@
         },
         {
           "type": "text",
-          "label": "Winning from Lottery etc."
+          "label": "Winning from Lottery etc"
         }
       ],
-      "deductions": [
+      "deduction": [
         {
           "type": "text",
-          "label": "Life insurance Premium"
+          "label": "Standard Deduction",
+          "value": "50,000",
+          "disabled": true
+        },
+        {
+          "type": "text",
+          "label": "Life Insurance Premium"
         },
         {
           "type": "text",
@@ -58,20 +65,78 @@
           "type": "text",
           "label": "Re-payment of housing loan etc"
         },
-         {
+        {
           "type": "text",
           "label": "Tuition fees paid for children"
         },
-         {
+        {
           "type": "text",
           "label": "5 Years fixed deposit with PO or Schedule Bank"
         },
-         {
+        {
           "type": "text",
           "label": "Medi-claim premium"
         }
       ]
     }
   },
-  "slabs": []
+  "tax-slab": {
+    "new": [
+      {
+        "start": 0,
+        "end": 250000,
+        "rate": 0
+      },
+      {
+        "start": 250000,
+        "end": 500000,
+        "rate": 5
+      },
+      {
+        "start": 500000,
+        "end": 750000,
+        "rate": 10
+      },
+      {
+        "start": 750000,
+        "end": 1000000,
+        "rate": 15
+      },
+      {
+        "start": 1000000,
+        "end": 1250000,
+        "rate": 20
+      },
+      {
+        "start": 1250000,
+        "end": 1500000,
+        "rate": 25
+      },
+      {
+        "start": 1500000,
+        "rate": 30
+      }
+    ],
+    "old": [
+      {
+        "start": 0,
+        "end": 250000,
+        "rate": 0
+      },
+      {
+        "start": 250000,
+        "end": 500000,
+        "rate": 5
+      },
+      {
+        "start": 500000,
+        "end": 1000000,
+        "rate": 20
+      },
+      {
+        "start": 1000000,
+        "rate": 30
+      }
+    ]
+  }
 }
