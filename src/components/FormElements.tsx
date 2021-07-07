@@ -55,6 +55,7 @@ export const TextField = ({
                 readOnly={disabled}
                 onChange={handleChange}
                 value={values[name]}
+                style={{ cursor: disabled ? 'not-allowed' : 'text' }}
             />
             <ErrorMessage name={name} render={(msg) => <div style={{ color: 'red' }}>{msg}</div>} />
         </div>
