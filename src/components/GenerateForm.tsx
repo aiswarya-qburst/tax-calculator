@@ -3,28 +3,29 @@ import { Form, SubmitButton } from './FormElements';
 import InputForm from './InputForm';
 import useFetch from '../hooks/useFetch';
 import { BasicContext } from '../App';
-import { Field } from '../models/common.interface';
-import { getName } from './utils';
+import { Initial, Field } from '../models/common.interface';
 import { getTotal } from './taxEngine/taxCalculator';
-import { useCallback } from 'react';
+import { getName } from './utils';
 
-interface Initial {
-    [key: string]: string;
-}
-
-const Income = ({ handleIncomeUpdate }: { handleIncomeUpdate: (e: number) => void }): JSX.Element => {
+const GenerateForm = ({
+    formType,
+    handleSectionTotalUpdate,
+}: {
+    formType: string;
+    handleSectionTotalUpdate: (e: number) => void;
+}): JSX.Element => {
     const [form, updateForm] = useState([] as Field[]);
     const [initial, setInitial] = useState({} as Initial);
     const { ay, empData } = useContext(BasicContext);
-    const { result, loading } = useFetch('income');
+    const { result, loading } = useFetch(formType);
 
     const handleSubmit = (fieldData: Record<string, string>) => {
-        const totalIncome: number = getTotal(Object.values(fieldData).map(Number));
-        handleIncomeUpdate(totalIncome);
+        const total: number = getTotal(Object.values(fieldData).map(Number));
+        handleSectionTotalUpdate(total);
     };
 
     useEffect(() => {
-        !loading && updateForm(result[ay].income);
+        !loading && result && result[ay] && updateForm(result[ay][formType]);
     }, [result, loading]);
 
     useEffect(() => {
@@ -38,7 +39,9 @@ const Income = ({ handleIncomeUpdate }: { handleIncomeUpdate: (e: number) => voi
         setInitial(val);
     }, [form]);
 
-    return (
+    return ay.length === 0 || empData.length === 0 ? (
+        <p className="text-teal-700 mt-4 flex justify-center">Select a Regime and Assessment year</p>
+    ) : (
         <>
             {!loading && form && Object.keys(initial).length > 0 && (
                 <div>
@@ -52,4 +55,4 @@ const Income = ({ handleIncomeUpdate }: { handleIncomeUpdate: (e: number) => voi
     );
 };
 
-export default Income;
+export default GenerateForm;
