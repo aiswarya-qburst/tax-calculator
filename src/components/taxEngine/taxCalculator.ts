@@ -1,4 +1,5 @@
-import { Slab } from '../../models/common.interface';
+import { Slab, TaxDescription } from '../../models/common.interface';
+import { getFormattedResult } from '../utils';
 
 /**
  * Gets the total tax amount to be paid annually and montly using income and deduction.
@@ -6,21 +7,30 @@ import { Slab } from '../../models/common.interface';
  * @param slab tax slab
  * @returns annual tax amount
  */
-export const getTotalTax = ((netTaxIncome: number, slab: Slab[]): number => {
+export const getTotalTax = ((netTaxIncome: number, slab: Slab[] = []): TaxDescription => {
     let annual = 0;
+    let resultOfEachStage = [];
 
-    slab.every((s) => {
+    netTaxIncome > 0 && slab.length && slab.every((s) => {
         if (!s.end || (netTaxIncome > s.start && netTaxIncome <= s.end)) {
             annual = annual + (netTaxIncome - s.start) * (s.rate / 100);
+            resultOfEachStage = [
+                ...resultOfEachStage,
+                getFormattedResult(s, netTaxIncome, annual),
+            ];
             return false;
         } else if (netTaxIncome > s.end) {
             annual = annual + (s.end - s.start) * (s.rate / 100);
+            resultOfEachStage = [
+                ...resultOfEachStage,
+                getFormattedResult(s, s.end, annual),
+            ];
         }
 
         return true;
     });
 
-    return annual;
+    return { annual, resultOfEachStage };
 });
 
 /**
