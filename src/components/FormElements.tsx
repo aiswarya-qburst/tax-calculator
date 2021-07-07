@@ -48,14 +48,13 @@ export const TextField = ({
         <div className="form-control-wrapper">
             {label && <label htmlFor={name}>{label}</label>}
             <FormField
-                className="form-control"
+                className={`form-control ${disabled ? 'cursor-not-allowed' : 'cursor-auto'}`}
                 type="text"
                 name={name}
                 id={name}
                 readOnly={disabled}
                 onChange={handleChange}
                 value={values[name]}
-                style={{ cursor: disabled ? 'not-allowed' : 'text' }}
             />
             <ErrorMessage name={name} render={(msg) => <div style={{ color: 'red' }}>{msg}</div>} />
         </div>
