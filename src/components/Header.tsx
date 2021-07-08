@@ -1,6 +1,5 @@
 import React from 'react';
 
-//: React.FunctionComponent<TotalTax>
 const Header = ({ tax }: { tax: number }): JSX.Element => {
     return (
         <div className="h-20 m-6">
@@ -9,11 +8,11 @@ const Header = ({ tax }: { tax: number }): JSX.Element => {
                 <div className="total">
                     <div>
                         <p>Annual Tax Amount</p>
-                        <p>{tax || '-'}</p>
+                        <p>{tax ? `Rs. ${tax}` : '-'}</p>
                     </div>
                     <div>
                         <p>Monthly Payable</p>
-                        <p>{tax / 12 || '-'}</p>
+                        <p>{tax ? `Rs. ${Math.round(tax / 12)}` : '-'}</p>
                     </div>
                 </div>
             </div>

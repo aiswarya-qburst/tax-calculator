@@ -33,7 +33,7 @@ const Total = ({ total }: { total: TotalTax }): JSX.Element => {
             <div className="total-section mt-10">
                 <p className="m-5">{`Annual Tax Amount: Rs ${total.taxWithDescription.annual}`}</p>
                 <p className="m-5 font-bold">{`Annual Tax Amount with ${total.cess}% cess: Rs ${total.withCess}`}</p>
-                <p className="m-5">{`Monthly Payable: Rs ${total.withCess / 12}`}</p>
+                <p className="m-5">{`Monthly Payable: Rs ${Math.round(total.withCess / 12)}`}</p>
             </div>
         </div>
     );
