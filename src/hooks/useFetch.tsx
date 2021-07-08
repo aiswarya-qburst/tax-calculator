@@ -1,16 +1,6 @@
 import { useEffect, useState } from 'react';
-// import { Data, User } from '../models/common.interface';
 
-// const getUpdatedData = (forms: Data, empData: User, regime: string): Data => {
-//     const updatedIncome = forms.income.map((inc) => {
-//         //TODO: cannot hardcode 'Salary'
-//         return inc.label === 'Salary' ? { ...inc, value: String(empData.salary) } : inc;
-//     });
-
-//     return regime === 'old' ? { ...forms, income: updatedIncome } : { income: updatedIncome };
-// };
-
-const useFetch = (param: string) => {
+const useFetch = (param: string): { result: Array<any>; loading: boolean } => {
     const [result, setResult] = useState([]);
     const [loading, setLoading] = useState(true);
 
