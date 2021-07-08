@@ -74,33 +74,11 @@ const Basic = ({
 
     return (
         <div className="basic-section">
-            {/* <Form initialValues={{ initial: general }}>
+            <Form initialValues={{ initial: general }}>
                 {general.map((g) => (
-                    <InputForm key={g.label} field={g} handleChange={handleChange} />
+                    <InputForm key={g.label} field={g} updateDetails={handleChange} />
                 ))}
-            </Form> */}
-            <form>
-                <div className="form-control-wrapper">
-                    <label htmlFor="employee_id">Employee ID</label>
-                    <input type="text" name="employee_id" className="form-control" onChange={handleChange}></input>
-                </div>
-                <div className="form-control-wrapper">
-                    <label htmlFor="regime">Regime</label>
-                    <select name="regime" className="form-control" onChange={handleChange}>
-                        <option value="">Choose...</option>
-                        <option value="old">Old Regime</option>
-                        <option value="new">New Regime</option>
-                    </select>
-                </div>
-                <div className="form-control-wrapper">
-                    <label htmlFor="ay">Assessment Year</label>
-                    <select name="assessment_year" className="form-control" onChange={handleChange}>
-                        <option value="">Choose...</option>
-                        <option value="20-21">2020-2021</option>
-                        <option value="21-22">2021-2022</option>
-                    </select>
-                </div>
-            </form>
+            </Form>
         </div>
     );
 };

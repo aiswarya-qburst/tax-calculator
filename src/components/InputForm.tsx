@@ -7,10 +7,12 @@ const InputForm = ({
     field,
     values,
     handleChange,
+    updateDetails,
 }: {
     field: Field;
     values?: Record<string, string>;
     handleChange?: (e: React.SyntheticEvent) => void;
+    updateDetails?: (e: React.SyntheticEvent) => void;
 }): JSX.Element => {
     const getFormElement = (
         name: string,
@@ -27,10 +29,12 @@ const InputForm = ({
             disabled: el.disabled ? el.disabled : false,
         };
         if (el.type === 'text') {
-            return <TextField data={data} values={values} handleChange={handleChange} />;
+            return <TextField data={data} values={values} handleChange={handleChange} updateDetails={updateDetails} />;
         }
         if (el.type === 'dropdown') {
-            return <SelectField data={data} values={values} handleChange={handleChange} />;
+            return (
+                <SelectField data={data} values={values} handleChange={handleChange} updateDetails={updateDetails} />
+            );
         }
     };
 

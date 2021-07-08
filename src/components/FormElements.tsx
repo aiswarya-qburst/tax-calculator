@@ -3,7 +3,7 @@ import { Formik, Field as FormField, ErrorMessage, useFormikContext } from 'form
 import { Field } from '../models/common.interface';
 
 interface FForm {
-    children: any;
+    children: any; //TODO: ReactNode;
     initialValues: Record<string, unknown>;
     handleSubmit?: (values: Record<string, unknown>) => void;
 }
@@ -37,12 +37,19 @@ export const TextField = ({
     data,
     values,
     handleChange,
+    updateDetails,
 }: {
     data: Field;
     values?: Record<string, string>;
     handleChange?: (e: React.SyntheticEvent) => void;
+    updateDetails?: (e: React.SyntheticEvent) => void;
 }): JSX.Element => {
     const { name, label, disabled } = data;
+
+    const onChangeHandler = (e) => {
+        handleChange(e);
+        updateDetails && updateDetails(e);
+    };
 
     return (
         <div className="form-control-wrapper">
@@ -53,7 +60,7 @@ export const TextField = ({
                 name={name}
                 id={name}
                 readOnly={disabled}
-                onChange={handleChange}
+                onChange={onChangeHandler}
                 value={values[name]}
             />
             <ErrorMessage name={name} render={(msg) => <div style={{ color: 'red' }}>{msg}</div>} />
@@ -65,12 +72,20 @@ export const SelectField = ({
     data,
     values,
     handleChange,
+    updateDetails,
 }: {
     data: Field;
     values?: Record<string, string>;
     handleChange?: (e: React.SyntheticEvent) => void;
+    updateDetails?: (e: React.SyntheticEvent) => void;
 }): JSX.Element => {
     const { name, label, options } = data;
+
+    //TODO: copy pasted
+    const onChangeHandler = (e) => {
+        handleChange(e);
+        updateDetails && updateDetails(e);
+    };
 
     return (
         <div className="form-control-wrapper">
@@ -80,7 +95,7 @@ export const SelectField = ({
                 id={name}
                 name={name}
                 className="form-control"
-                onChange={handleChange}
+                onChange={onChangeHandler}
                 value={values[name]}
             >
                 <option value="">Choose...</option>
