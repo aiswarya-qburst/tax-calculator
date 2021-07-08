@@ -10,8 +10,7 @@ const getContent = (slabs: Slab): string => {
     else return `Rs ${slabs.start} To Rs ${slabs.end}`;
 };
 
-//: FC<Slab>
-const Slabs = (): JSX.Element => {
+const Slabs: FC = (): ReactElement => {
     const { regime, updateSlab } = useContext(BasicContext);
     const { result } = useFetch('tax-slab');
     const slab = result[regime];
