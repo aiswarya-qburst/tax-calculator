@@ -44,7 +44,7 @@ const App: React.FunctionComponent = () => {
     }, [regime, slab, total]);
 
     useEffect(() => {
-        return () => {
+        window.onbeforeunload = () => {
             localStorage.clear();
         };
     });
