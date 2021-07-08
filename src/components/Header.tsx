@@ -1,8 +1,7 @@
 import React from 'react';
-import { TotalTax } from '../models/common.interface';
 
 //: React.FunctionComponent<TotalTax>
-const Header = ({ tax }: { tax: TotalTax }): JSX.Element => {
+const Header = ({ tax }: { tax: number }): JSX.Element => {
     return (
         <div className="h-20 m-6">
             <div className="header">
@@ -10,11 +9,11 @@ const Header = ({ tax }: { tax: TotalTax }): JSX.Element => {
                 <div className="total">
                     <div>
                         <p>Annual Tax Amount</p>
-                        <p>{tax.annual || '-'}</p>
+                        <p>{tax || '-'}</p>
                     </div>
                     <div>
                         <p>Monthly Payable</p>
-                        <p>{tax.annual / 12 || '-'}</p>
+                        <p>{tax / 12 || '-'}</p>
                     </div>
                 </div>
             </div>

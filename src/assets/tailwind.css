@@ -48,3 +48,16 @@
 .submit-btn {
     @apply bg-orange-400 p-4 m-3 float-right text-red-900 rounded;
 }
+
+.total-section {
+    @apply grid grid-cols-3 bg-teal-50 border-2 border-teal-700 text-center; 
+    /*TODO: grid grid-cols-3 same as (.basic-section form) style*/
+}
+
+.total-table {
+    @apply table-fixed w-full;
+}
+
+.total-table tr {
+    @apply border-b-2 border-teal-700;
+}

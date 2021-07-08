@@ -26,11 +26,29 @@ export interface Slab {
     rate: number;
 }
 
+export interface StageTotal {
+    range: string;
+    rate: string;
+    totalOfStage: string;
+}
+
+export interface TaxDescription {
+    annual: number;
+    resultOfEachStage: StageTotal[];
+}
+
 export interface TotalTax {
     totalIncome?: number;
     totalDeduction?: number;
     netTaxIncome: number;
-    annual: number;
+    taxWithDescription: TaxDescription;
+    cess: number;
+    withCess: number;
+}
+
+export interface IncOrDed {
+    income: number;
+    deduction: number;
 }
 
 export interface Data {
@@ -39,4 +57,8 @@ export interface Data {
 
 export interface Amount {
     [key: string]: number;
+}
+
+export interface Initial {
+    [key: string]: string;
 }
