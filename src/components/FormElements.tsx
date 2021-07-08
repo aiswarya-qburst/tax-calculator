@@ -75,7 +75,14 @@ export const SelectField = ({
     return (
         <div className="form-control-wrapper">
             {label && <label htmlFor={name}>{label}</label>}
-            <FormField as="select" id={name} name={name} className="form-control" onChange={handleChange}>
+            <FormField
+                as="select"
+                id={name}
+                name={name}
+                className="form-control"
+                onChange={handleChange}
+                value={values[name]}
+            >
                 <option value="">Choose...</option>
                 {options.map((optn) => (
                     <option key={optn.value} value={optn.value} label={optn.label || optn.value} />
