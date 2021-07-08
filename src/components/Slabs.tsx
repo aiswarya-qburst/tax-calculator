@@ -18,14 +18,14 @@ const Slabs = (): JSX.Element => {
 
     useEffect(() => {
         updateSlab(slab);
-    }, [result]);
+    }, [regime, result]);
 
     return (
         <div className="flex justify-center">
             {!slab || slab.length === 0 ? (
-                <>Select a Regime</>
+                <p className="text-teal-700 mt-4">Select a Regime and Assessment year</p>
             ) : (
-                <div className="">
+                <div>
                     <table className="table-fixed w-full">
                         <thead>
                             <tr>
