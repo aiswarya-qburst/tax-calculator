@@ -17,7 +17,7 @@ const GenerateForm = ({
 }): JSX.Element => {
     const [form, updateForm] = useState([] as Field[]);
     const [initial, setInitial] = useState({} as Initial);
-    const { regime, ay, empData } = useContext(BasicContext);
+    const { ay, empData } = useContext(BasicContext);
     const { result, loading } = useFetch(formType);
 
     const handleSubmit = (fieldData: Record<string, string>) => {
@@ -30,7 +30,7 @@ const GenerateForm = ({
 
     useEffect(() => {
         !loading && result && result[ay] && updateForm(result[ay][formType]);
-    }, [regime, ay, result, loading]);
+    }, [ay, result, loading]);
 
     useEffect(() => {
         const savedForm = getSavedForm();
@@ -45,7 +45,7 @@ const GenerateForm = ({
             });
 
         setInitial(val);
-    }, [form, empData.salary]);
+    }, [form]);
 
     return ay.length === 0 || empData.length === 0 ? (
         <p className="text-teal-700 mt-4 flex justify-center">Select a Regime and Assessment year</p>
