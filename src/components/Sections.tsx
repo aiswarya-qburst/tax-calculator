@@ -4,6 +4,7 @@ import Tabs from './Tabs';
 import { BasicContext } from '../App';
 import { useEffect } from 'react';
 
+// TODO: should this be hardcoded?
 const tabs = ['tax-slab', 'income', 'deduction', 'total'];
 
 const Sections: FC = () => {

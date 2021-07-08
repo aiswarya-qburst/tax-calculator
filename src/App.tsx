@@ -1,9 +1,10 @@
 import React, { createContext, Suspense, useEffect, useState } from 'react';
 import Basic from './components/Basic';
 import Header from './components/Header';
-// import Sections from './components/Sections';
 import { getTotalTax, getTotalIncome, getWithCess } from './components/taxEngine/taxCalculator';
-import { IncOrDed, Slab, TotalTax, User } from './models/common.interface';
+import { Slab } from './models/slab.interface';
+import { Total, TotalTax } from './models/tax.interface';
+import { User } from './models/user.interface';
 const Sections = React.lazy(() => import('./components/Sections'));
 
 export const BasicContext = createContext(null);
@@ -13,7 +14,7 @@ const App: React.FunctionComponent = () => {
     const [slab, updateSlab] = useState([] as Array<Slab>);
     const [empData, updateEmpData] = useState({} as User);
     const [ay, updateAY] = useState('');
-    const [total, updateTotal] = useState({} as IncOrDed);
+    const [total, updateTotal] = useState({} as Total);
     const [totalTax, updateTotalTax] = useState({} as TotalTax);
 
     const contextValue = {

@@ -1,17 +1,7 @@
 import React from 'react';
 import { Formik, Field as FormField, ErrorMessage, useFormikContext } from 'formik';
-import { Field } from '../models/common.interface';
-
-interface FForm {
-    children: any; //TODO: ReactNode;
-    initialValues: Record<string, unknown>;
-    handleSubmit?: (values: Record<string, unknown>) => void;
-}
-
-interface Button {
-    title: string;
-    handleSubmit?: (e: React.MouseEventHandler<React.SyntheticEvent>) => void;
-}
+import { FForm } from '../models/form.interface';
+import { Button, Field } from '../models/formelement.interface';
 
 export const Form = (props: FForm): JSX.Element => {
     const onSubmit = (values, { setSubmitting }) => {
