@@ -1,5 +1,5 @@
-import { Slab } from '../../models/slab.interface';
-import { TaxDescription } from '../../models/tax.interface';
+import { Slab } from '../../models/iSlab';
+import { TaxDescription } from '../../models/iTax';
 import { getFormattedResult } from '../utils';
 
 /**

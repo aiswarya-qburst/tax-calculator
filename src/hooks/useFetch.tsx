@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Field } from '../models/formelement.interface';
-import { Slab } from '../models/slab.interface';
-import { User } from '../models/user.interface';
+import { Field } from '../models/iFormElement';
+import { Slab } from '../models/iSlab';
+import { User } from '../models/iUser';
 
 const useFetch = (
     param: string,

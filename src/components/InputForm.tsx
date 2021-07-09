@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field } from '../models/formelement.interface';
+import { Field } from '../models/iFormElement';
 import { TextField, SelectField } from './FormElements';
 import { getName } from './utils';
 

@@ -1,5 +1,5 @@
-import { Slab } from "../models/slab.interface";
-import { StageTotal } from "../models/tax.interface";
+import { Slab } from "../models/iSlab";
+import { StageTotal } from "../models/iTax";
 
 /**
  * Transform input text. eg: Total Income -> total_income

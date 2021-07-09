@@ -1,5 +1,5 @@
 import React from 'react';
-import { TotalTax } from '../models/tax.interface';
+import { TotalTax } from '../models/iTax';
 
 const Total = ({ total }: { total: TotalTax }): JSX.Element => {
     return (

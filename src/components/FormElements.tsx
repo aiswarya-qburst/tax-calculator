@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Field as FormField, ErrorMessage, useFormikContext } from 'formik';
-import { FForm } from '../models/form.interface';
-import { Button, Field } from '../models/formelement.interface';
+import { FForm } from '../models/iForm';
+import { Button, Field } from '../models/iFormElement';
 
 export const Form = (props: FForm): JSX.Element => {
     const onSubmit = (values, { setSubmitting }) => {

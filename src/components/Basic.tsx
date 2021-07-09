@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 import { Form } from './FormElements';
 import InputForm from './InputForm';
-import { Field } from '../models/formelement.interface';
-import { User } from '../models/user.interface';
+import { Field } from '../models/iFormElement';
+import { User } from '../models/iUser';
 
 const general: Field[] = [
     {

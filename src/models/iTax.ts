@@ -21,8 +21,3 @@ export interface TotalTax {
 export interface Amount {
     [key: string]: number;
 }
-
-export interface Total {
-    income: number;
-    deduction: number;
-}

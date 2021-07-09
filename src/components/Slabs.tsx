@@ -1,7 +1,7 @@
 import React, { useContext, FC, ReactElement } from 'react';
 import useFetch from '../hooks/useFetch';
 import { BasicContext } from '../App';
-import { Slab } from '../models/slab.interface';
+import { Slab } from '../models/iSlab';
 import { useEffect } from 'react';
 
 const getContent = (slabs: Slab): string => {
