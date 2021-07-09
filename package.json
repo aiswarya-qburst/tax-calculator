@@ -7,7 +7,7 @@
     "start": "serve dist -p 3000",
     "build": "npm run lint && npm run watch:css && webpack --mode production",
     "watch": "webpack -w",
-    "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
+    "watch:css": "npx postcss src/assets/tailwind.css > src/assets/main.css",
     "lint": "eslint '*/**/*.tsx'",
     "test": "jest",
     "test:watch": "jest --watch"
@@ -44,12 +44,15 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^4.0.3",
     "@typescript-eslint/eslint-plugin": "^4.28.0",
     "@typescript-eslint/parser": "^4.28.0",
     "autoprefixer": "^10.2.6",
+    "cssnano": "^5.0.6",
     "eslint": "^7.29.0",
     "eslint-plugin-react": "^7.24.0",
     "html-webpack-plugin": "^5.3.1",
+    "postcss": "^8.3.5",
     "postcss-cli": "^8.3.1",
     "tailwindcss": "^2.2.2",
     "ts-loader": "^9.2.3",
