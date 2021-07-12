@@ -54,10 +54,50 @@
     /*TODO: grid grid-cols-3 same as (.basic-section form) style*/
 }
 
-.total-table {
-    @apply table-fixed w-full;
+/* start: Styles for Slab section */
+
+.slab-section {
+    max-height: 50px;
+    overflow: hidden;
+    /* transition: all 1s ease; */
+    @apply mx-8 border-2 border-teal-700;
 }
 
-.total-table tr {
-    @apply border-b border-teal-700;
+.slab-header {
+    padding: 13px;
+    @apply text-teal-700 bg-teal-50;
 }
+
+.slab-header-icon {
+    @apply float-right font-bold text-xl;
+}
+
+.slab-section.expanded {
+    max-height: 500px;
+}
+
+/* end: Styles for Slab section */
+
+/* start: Common table styles */
+
+.table-wrapper {
+    @apply flex justify-center;
+}
+
+.table {
+    @apply table-fixed w-3/5 border-2 border-teal-700;
+}
+
+.table thead th {
+    @apply border-b-2 border-teal-700;
+}
+
+.table th, .table td {
+    @apply text-left px-10;
+}
+
+.table tbody tr:nth-child(odd){
+    @apply bg-teal-50;
+  }
+
+/* end: Common table styles */

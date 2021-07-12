@@ -1,40 +1,29 @@
 import React from 'react';
 import { TotalTax } from '../models/iTax';
 
+/**
+ * Separate out camel case text. eg: camelCase -> Camel Case
+ * @param text text to format
+ * @returns formatted text
+ */
+const formatText = (text: string): string => {
+    const result = text.replace(/([A-Z])/g, ' $1');
+    return result.charAt(0).toUpperCase() + result.slice(1);
+};
+
 const Total = ({ total }: { total: TotalTax }): JSX.Element => {
     return (
-        <div className="m-14">
-            <div className="total-section">
-                <p className="m-5">{`Total Income: Rs ${total.totalIncome}`}</p>
-                <p className="m-5">{`Total Deduction: Rs ${total.totalDeduction}`}</p>
-                <p className="m-5 font-bold">{`Net taxable income after all deductions: Rs ${total.netTaxIncome}`}</p>
-            </div>
-            <div className="mt-10">
-                <table className="total-table">
-                    <thead>
-                        <tr>
-                            <th className="w-1/3">Tax Slab</th>
-                            <th className="w-1/3">Tax Rate</th>
-                            <th className="w-1/3">Tax</th>
+        <div className="table-wrapper mt-10">
+            <table className="table">
+                <tbody>
+                    {Object.entries(total).map(([key, value]) => (
+                        <tr key={key}>
+                            <td>{formatText(key)}</td>
+                            <td>{value}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {total.taxWithDescription.resultOfEachStage.map((r, i) => (
-                            //TODO: key value should not be i
-                            <tr key={i} className="bg-teal-50 text-center">
-                                <td>{r.range}</td>
-                                <td>{r.rate}</td>
-                                <td>{r.totalOfStage}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-            <div className="total-section mt-10">
-                <p className="m-5">{`Annual Tax Amount: Rs ${total.taxWithDescription.annual}`}</p>
-                <p className="m-5 font-bold">{`Annual Tax Amount with ${total.cess}% cess: Rs ${total.withCess}`}</p>
-                <p className="m-5">{`Monthly Payable: Rs ${Math.round(total.withCess / 12)}`}</p>
-            </div>
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 };

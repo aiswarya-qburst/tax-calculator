@@ -13,9 +13,9 @@ export interface TotalTax {
     totalIncome?: number;
     totalDeduction?: number;
     netTaxIncome: number;
-    taxWithDescription: TaxDescription;
+    taxWithDescription?: TaxDescription;
     cess: number;
-    withCess: number;
+    totalTaxWithCess: number;
 }
 
 export interface Amount {

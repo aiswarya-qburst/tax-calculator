@@ -1,18 +1,17 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import TabContent from './TabContent';
 import Tabs from './Tabs';
 import { BasicContext } from '../App';
-import { useEffect } from 'react';
 
 // TODO: should this be hardcoded?
-const tabs = ['tax-slab', 'income', 'deduction', 'total'];
+const tabs = ['income', 'deduction', 'total'];
 
 const Sections: FC = () => {
-    const [active, setActive] = useState('tax-slab');
+    const [active, setActive] = useState('income');
     const { regime } = useContext(BasicContext);
 
     useEffect(() => {
-        setActive('tax-slab');
+        regime === 'new' && active === 'deduction' && setActive('income');
     }, [regime]);
 
     return (

@@ -1,6 +1,7 @@
 import React, { createContext, Suspense, useEffect, useState } from 'react';
 import Basic from './components/Basic';
 import Header from './components/Header';
+import Slabs from './components/Slabs';
 import { getTotalTax, getTotalIncome, getWithCess } from './components/taxEngine/taxCalculator';
 import { Slab } from './models/iSlab';
 import { Amount, TotalTax } from './models/iTax';
@@ -10,8 +11,8 @@ const Sections = React.lazy(() => import('./components/Sections'));
 export const BasicContext = createContext(null);
 
 const App: React.FunctionComponent = () => {
-    const [regime, updateRegime] = useState('');
-    const [slab, updateSlab] = useState([] as Array<Slab>);
+    const [regime, updateRegime] = useState<string>('');
+    const [slab, updateSlab] = useState([] as Slab[]);
     const [empData, updateEmpData] = useState({} as User);
     const [ay, updateAY] = useState('');
     const [total, updateTotal] = useState({} as Amount);
@@ -36,9 +37,9 @@ const App: React.FunctionComponent = () => {
             totalIncome: total.income,
             totalDeduction: total.deduction,
             netTaxIncome: totalIncome,
-            taxWithDescription: totalTax,
+            //taxWithDescription: totalTax, // TODO: pull this out.
             cess: 4,
-            withCess: totalTaxWithCess,
+            totalTaxWithCess: totalTaxWithCess,
         };
 
         updateTotalTax(totalTaxAmount);
@@ -52,9 +53,10 @@ const App: React.FunctionComponent = () => {
 
     return (
         <div>
-            <Header tax={Object.keys(totalTax).length ? totalTax.withCess : 0} />
+            <Header tax={Object.keys(totalTax).length ? totalTax.totalTaxWithCess : 0} />
             <Basic updateRegime={updateRegime} updateEmpData={updateEmpData} updateAY={updateAY} />
             <BasicContext.Provider value={contextValue}>
+                <Slabs />
                 <Suspense fallback={<div>Loading...</div>}>
                     <Sections />
                 </Suspense>
