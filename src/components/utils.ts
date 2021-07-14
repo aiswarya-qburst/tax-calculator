@@ -1,3 +1,4 @@
+import { Field } from "../models/iFormElement";
 import { Slab } from "../models/iSlab";
 import { StageTotal } from "../models/iTax";
 
@@ -20,3 +21,7 @@ export const getFormattedResult = (slab: Slab, amount: number, total: number): S
         totalOfStage: `${total}`,
     }
 };
+
+export const setLocalStorage = (key: string, value: Record<string, string>): void => localStorage.setItem(key, JSON.stringify(value));
+
+export const getLocalStorage = (key: string): string => localStorage.getItem(key);
