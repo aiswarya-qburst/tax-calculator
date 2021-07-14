@@ -21,8 +21,6 @@ const Modal = ({
     setNewField: (f: Record<string, string>) => void;
 }): JSX.Element => {
     const handleSubmit = (data: Record<string, string>) => {
-        console.warn(data);
-
         const newField = { [data.income_type]: '' };
         setNewField(newField);
         handleShow(false);

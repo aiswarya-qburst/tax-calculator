@@ -12,8 +12,6 @@ import Modal from './Modal';
 
 const formatData = (data: Record<string, string>): Field[] => {
     return Object.entries(data).map(([key, value]) => {
-        console.warn(key);
-
         return { label: key, type: 'text', value: value, name: getName(key) };
     });
 };
@@ -66,18 +64,14 @@ const GenerateForm = ({
 
     useEffect(() => {
         const savedForm = getSavedForm();
-        console.warn('savedForm', savedForm);
         let val = {};
         if (savedForm && Object.keys(savedForm).length > 0) {
             val = savedForm;
         } else {
             form &&
                 form.map((f) => {
-                    console.warn(f.name);
-
                     val = { ...val, [f.name]: f.name === 'salary' ? empData.salary : '' };
                 });
-            console.warn(val);
         }
         updateFormData(val);
     }, [form]);
