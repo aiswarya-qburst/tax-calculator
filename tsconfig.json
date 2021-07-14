@@ -2,8 +2,9 @@
     "compilerOptions": {
         // Allow importing like `import React from 'react'`
         "allowSyntheticDefaultImports": true,
-        // Use ES2015 module system
-        "module": "es2015",
+        // "esModuleInterop": true,
+        // Use esnext module system
+        "module": "esnext",
         "moduleResolution": "node",
         // Set React as the JSX factory
         "jsx": "react",
