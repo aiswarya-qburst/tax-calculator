@@ -1,6 +1,11 @@
-export interface Button {
+export interface SubmitButton {
     title: string;
     handleSubmit?: (e: React.MouseEventHandler<React.SyntheticEvent>) => void;
+}
+
+export interface Button {
+    title: string;
+    handleClick?: (e: React.SyntheticEvent) => void;
 }
 
 interface Option {
@@ -9,7 +14,7 @@ interface Option {
 }
 
 export interface Field {
-    name?: string;
+    name: string;
     label: string;
     type: string;
     options?: Option[];
