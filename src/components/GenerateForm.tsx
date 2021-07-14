@@ -1,13 +1,22 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Form, SubmitButton } from './FormElements';
+import { Form, FormSubmitButton, UtilityButton } from './FormElements';
 import InputForm from './InputForm';
 import useFetch from '../hooks/useFetch';
 import { BasicContext } from '../App';
-import { Initial } from '../models/iForm';
+import { SerializedData } from '../models/iForm';
 import { Field } from '../models/iFormElement';
 import { getTotal } from './taxEngine/taxCalculator';
-import { getName } from './utils';
+import { getName, getLocalStorage, setLocalStorage } from './utils';
 import { useCallback } from 'react';
+import Modal from './Modal';
+
+const formatData = (data: Record<string, string>): Field[] => {
+    return Object.entries(data).map(([key, value]) => {
+        console.warn(key);
+
+        return { label: key, type: 'text', value: value, name: getName(key) };
+    });
+};
 
 const GenerateForm = ({
     formType,
@@ -17,47 +26,74 @@ const GenerateForm = ({
     handleSectionTotalUpdate: (e: number) => void;
 }): JSX.Element => {
     const [form, updateForm] = useState([] as Field[]);
-    const [initial, setInitial] = useState({} as Initial);
-    const { ay, empData } = useContext(BasicContext);
+    const [formData, updateFormData] = useState({} as SerializedData);
+    const [showAddNewFieldModal, setShowAddNewFieldModal] = useState(false);
+    const [newField, setNewField] = useState({} as Record<string, string>);
+
+    const { regime, empData } = useContext(BasicContext);
+
     const { result, loading } = useFetch(formType);
 
-    const handleSubmit = (fieldData: Record<string, string>) => {
-        localStorage.setItem(formType, JSON.stringify(fieldData));
-        const total: number = getTotal(Object.values(fieldData).map(Number));
+    const getSavedForm = useCallback(() => JSON.parse(getLocalStorage(formType)), [formType]);
+
+    const handleSubmit = (serializedData: Record<string, string>) => {
+        setLocalStorage(formType, serializedData);
+        const total: number = getTotal(Object.values(serializedData).map(Number));
         handleSectionTotalUpdate(total);
     };
 
-    const getSavedForm = useCallback(() => JSON.parse(localStorage.getItem(formType)), [formType]);
-
-    useEffect(() => {
-        !loading && result && result[ay] && updateForm(result[ay][formType]);
-    }, [ay, result, loading]);
+    const handleAddNewFieldClick = () => {
+        setShowAddNewFieldModal(true);
+    };
 
     useEffect(() => {
         const savedForm = getSavedForm();
+        if (savedForm && Object.keys(savedForm).length > 0) {
+            updateForm(formatData(savedForm));
+        } else {
+            !loading && result && updateForm(result[formType]);
+        }
+    }, [result, loading]);
+
+    useEffect(() => {
+        if (Object.keys(newField).length > 0) {
+            const updatedFormData = { ...formData, ...newField };
+
+            setLocalStorage(formType, updatedFormData);
+            updateForm(formatData(updatedFormData));
+        }
+    }, [newField]);
+
+    useEffect(() => {
+        const savedForm = getSavedForm();
+        console.warn('savedForm', savedForm);
         let val = {};
+        if (savedForm && Object.keys(savedForm).length > 0) {
+            val = savedForm;
+        } else {
+            form &&
+                form.map((f) => {
+                    console.warn(f.name);
 
-        form &&
-            form.map((f) => {
-                const name = getName(f.label);
-                const fieldValue = !savedForm ? '' : savedForm[name];
-
-                val = { ...val, [name]: f.label === 'Salary' ? empData.salary : fieldValue };
-            });
-
-        setInitial(val);
+                    val = { ...val, [f.name]: f.name === 'salary' ? empData.salary : '' };
+                });
+            console.warn(val);
+        }
+        updateFormData(val);
     }, [form]);
 
-    return ay.length === 0 || empData.length === 0 ? (
-        <p className="text-teal-700 mt-4 flex justify-center">Select a Regime and Assessment year</p>
+    return !regime || empData.length === 0 ? (
+        <p className="text-teal-700 mt-4 flex justify-center">Select a Regime</p>
     ) : (
         <>
-            {!loading && form && Object.keys(initial).length > 0 && (
+            {!loading && form && Object.keys(formData).length > 0 && (
                 <div>
-                    <Form initialValues={initial} handleSubmit={handleSubmit}>
-                        {form && form.map((el) => <InputForm key={el.label} field={el} />)}
-                        <SubmitButton title="Save & continue" />
+                    <Form initialValues={formData} handleSubmit={handleSubmit}>
+                        {form && form.map((el) => <InputForm key={el.name} field={el} />)}
+                        <FormSubmitButton title="Save & continue" />
+                        <UtilityButton title="Add other income" handleClick={handleAddNewFieldClick} />
                     </Form>
+                    <Modal show={showAddNewFieldModal} handleShow={setShowAddNewFieldModal} setNewField={setNewField} />
                 </div>
             )}
         </>
