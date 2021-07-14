@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Formik, Field as FormField, ErrorMessage, useFormikContext } from 'formik';
 import { FForm } from '../models/iForm';
-import { Button, Field } from '../models/iFormElement';
+import { Button, Field, SubmitButton } from '../models/iFormElement';
 
 export const Form = (props: FForm): JSX.Element => {
     const onSubmit = (values, { setSubmitting }) => {
@@ -48,7 +48,6 @@ export const TextField = ({
                 className={`form-control ${disabled ? 'cursor-not-allowed' : 'cursor-auto'}`}
                 type="text"
                 name={name}
-                id={name}
                 readOnly={disabled}
                 onChange={onChangeHandler}
                 value={values[name]}
@@ -80,14 +79,7 @@ export const SelectField = ({
     return (
         <div className="form-control-wrapper">
             {label && <label htmlFor={name}>{label}</label>}
-            <FormField
-                as="select"
-                id={name}
-                name={name}
-                className="form-control"
-                onChange={onChangeHandler}
-                value={values[name]}
-            >
+            <FormField as="select" name={name} className="form-control" onChange={onChangeHandler} value={values[name]}>
                 <option value="">Choose...</option>
                 {options.map((optn) => (
                     <option key={optn.value} value={optn.value} label={optn.label || optn.value} />
@@ -98,7 +90,15 @@ export const SelectField = ({
     );
 };
 
-export const SubmitButton: React.FunctionComponent<Button> = ({ title }: Button) => {
+export const UtilityButton: FC<Button> = ({ title, handleClick }: Button) => {
+    return (
+        <button type="button" className="submit-btn" onClick={handleClick}>
+            {title}
+        </button>
+    );
+};
+
+export const FormSubmitButton: FC<SubmitButton> = ({ title }: SubmitButton) => {
     const { isSubmitting } = useFormikContext();
 
     return (
