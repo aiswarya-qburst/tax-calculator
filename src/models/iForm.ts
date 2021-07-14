@@ -4,6 +4,6 @@ export interface FForm {
     handleSubmit?: (values: Record<string, unknown>) => void;
 }
 
-export interface Initial {
+export interface SerializedData {
     [key: string]: string;
 }
