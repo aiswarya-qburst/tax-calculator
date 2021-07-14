@@ -1,84 +1,89 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "name": "Iron Man",
-      "salary": "750000"
-    },
-    {
-      "id": 2,
-      "name": "Captain America",
-      "salary": "300000"
-    },
-    {
-      "id": 3,
-      "name": "Black widow",
-      "salary": "1000000"
-    }
-  ],
+  "users": {
+    "id": 1,
+    "name": "Iron Man",
+    "salary": "750000"
+  },
   "forms": {
-    "20-21": {
-      "income": [
-        {
-          "type": "text",
-          "label": "Salary",
-          "required": true,
-          "disabled": true
-        },
-        {
-          "type": "text",
-          "label": "House property"
-        },
-        {
-          "type": "text",
-          "label": "Interest"
-        },
-        {
-          "type": "text",
-          "label": "Winning from Lottery etc"
-        }
-      ],
-      "deduction": [
-        {
-          "type": "text",
-          "label": "Standard Deduction",
-          "value": "50,000",
-          "disabled": true
-        },
-        {
-          "type": "text",
-          "label": "Life Insurance Premium"
-        },
-        {
-          "type": "text",
-          "label": "Contribution towards provident fund / PPF"
-        },
-        {
-          "type": "text",
-          "label": "Investment in NSC"
-        },
-        {
-          "type": "text",
-          "label": "Contribution toward notified pension fund by MF/UTI"
-        },
-        {
-          "type": "text",
-          "label": "Re-payment of housing loan etc"
-        },
-        {
-          "type": "text",
-          "label": "Tuition fees paid for children"
-        },
-        {
-          "type": "text",
-          "label": "5 Years fixed deposit with PO or Schedule Bank"
-        },
-        {
-          "type": "text",
-          "label": "Medi-claim premium"
-        }
-      ]
-    }
+    "income": [
+      {
+        "type": "text",
+        "label": "Salary",
+        "name": "salary",
+        "required": true,
+        "disabled": true
+      },
+      {
+        "type": "text",
+        "label": "HRA",
+        "name": "hra",
+        "sub": "salary"
+      },
+      {
+        "type": "text",
+        "label": "Income from House rental",
+        "name": "rental_income"
+      },
+      {
+        "type": "text",
+        "label": "Interest",
+        "name": "interest"
+      },
+      {
+        "type": "text",
+        "label": "Winning from Lottery etc",
+        "name": "lottery"
+      }
+    ],
+    "deduction": [
+      {
+        "type": "text",
+        "label": "Standard Deduction",
+        "name": "std_deduction",
+        "value": "50,000",
+        "disabled": true
+      },
+      {
+        "type": "text",
+        "label": "Life Insurance Premium",
+        "name": "life_insurance"
+      },
+      {
+        "type": "text",
+        "label": "Contribution towards provident fund / PPF",
+        "name": "pf"
+      },
+      {
+        "type": "text",
+        "label": "Investment in NSC",
+        "name": "nsc"
+      },
+      {
+        "type": "text",
+        "label": "Contribution toward notified pension fund by MF/UTI",
+        "name": "pension"
+      },
+      {
+        "type": "text",
+        "label": "Re-payment of housing loan etc",
+        "name": "housing_loan"
+      },
+      {
+        "type": "text",
+        "label": "Tuition fee paid for children",
+        "name": "tuition fee"
+      },
+      {
+        "type": "text",
+        "label": "5 Years fixed deposit with PO or Schedule Bank",
+        "name": "fd"
+      },
+      {
+        "type": "text",
+        "label": "Medi-claim premium",
+        "name": "mediclaim"
+      }
+    ]
   },
   "tax-slab": {
     "new": [
