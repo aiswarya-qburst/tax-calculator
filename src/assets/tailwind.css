@@ -59,7 +59,11 @@
 .slab-section {
     max-height: 50px;
     overflow: hidden;
-    /* transition: all 1s ease; */
+    transition: all 1s ease 0s;
+    -moz-transition: all 1s ease 0s;
+    -ms-transition: all 1s ease 0s;
+    -o-transition: all 1s ease 0s;
+    -webkit-transition: all 1s ease 0s;
     @apply mx-8 border-2 border-teal-700;
 }
 
@@ -98,6 +102,27 @@
 
 .table tbody tr:nth-child(odd){
     @apply bg-teal-50;
-  }
+}
 
 /* end: Common table styles */
+
+.modal {
+    position: fixed;
+  bottom: 0;
+  width: 100%;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s;
+  @apply bg-teal-50 border-t-2 border-teal-700;
+}
+
+@-webkit-keyframes slideIn {
+    from {bottom: -300px; opacity: 0} 
+    to {bottom: 0; opacity: 1}
+  }
+  
+  @keyframes slideIn {
+    from {bottom: -300px; opacity: 0}
+    to {bottom: 0; opacity: 1}
+  }
