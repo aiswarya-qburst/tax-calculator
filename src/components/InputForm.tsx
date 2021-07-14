@@ -38,7 +38,7 @@ const InputForm = ({
         }
     };
 
-    return !field ? <></> : <>{getFormElement(getName(field.label), field, values, handleChange)}</>;
+    return !field ? <></> : <>{getFormElement(getName(field.name), field, values, handleChange)}</>;
 };
 
 export default InputForm;
